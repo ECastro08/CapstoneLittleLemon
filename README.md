@@ -8,8 +8,8 @@ username = prueba
 
 http://127.0.0.1:8000/auth/token/login
 
-#### edpoint para ver el menu del restaurante
+#### edpoint para ver el menu del restaurante, ingresar el token en la pestana auth la opcion Bearer token 
 http://127.0.0.1:8000/restaurant/menu/
 
-#### edpoint para ver las reservas hechas
+#### edpoint para ver las reservas hechas, ingresar el token en la pestana auth la opcion Bearer token 
 http://127.0.0.1:8000/restaurant/booking/
