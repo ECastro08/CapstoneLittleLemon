@@ -3,7 +3,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from . import views
 
 urlpatterns = [
-    path('token/login', obtain_auth_token, name='auth'),
+    #path('token/login', obtain_auth_token, name='auth'),
     path('index/', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('menu/', views.MenuItemView.as_view(), name='table-list'),

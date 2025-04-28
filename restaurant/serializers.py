@@ -1,15 +1,15 @@
 from rest_framework import serializers
 
-from .models import Booking, Table
+from .models import Booking, Menu
 
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = '__all__'
 
-class TableSerializer(serializers.ModelSerializer):
+class MenuSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Table
+        model = Menu
         fields = '__all__'      
 
      
