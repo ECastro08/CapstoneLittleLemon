@@ -14,7 +14,7 @@ def about(request):
 
 
 class MenuItemView(generics.ListCreateAPIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
 
@@ -24,7 +24,7 @@ class MenuItemSingleView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MenuSerializer
 
 class BookingList(generics.ListCreateAPIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
