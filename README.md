@@ -4,6 +4,7 @@
 ### generar token proporcionando los siguientes datos
 password = contrasenadeprueba
 
+
 username = prueba
 
 http://127.0.0.1:8000/auth/token/login
