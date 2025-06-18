@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant',
+    'users',
+    'crispy_forms',
+    'crispy_tailwind',
     'rest_framework',
     'djoser',
     'rest_framework.authtoken',
@@ -147,3 +150,7 @@ REST_FRAMEWORK = {
 }
 
 DJOSER={"USER_ID_FIELD":"username"}
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"

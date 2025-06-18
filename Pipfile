@@ -9,6 +9,7 @@ djangorestframework = "*"
 mysqlclient = "*"
 djoser = "*"
 python-decouple = "*"
+crispy-tailwind = "*"
 
 [dev-packages]
 
