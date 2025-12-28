@@ -1,24 +1,23 @@
-# Proyecto Final Capstone
-# Clonar el proyecto
-# instalar dependencias
-    `pipenv shell`
-# correr servidor Django
-    `python manage.py runserver`
+# 🚀 Proyecto Final Capstone – Backend con Django
 
-## Endpoints para prueba
+Este proyecto corresponde al **Capstone Final**, desarrollado con **Django**, enfocado en la construcción de una API robusta, segura y escalable.  
+Incluye autenticación mediante tokens y buenas prácticas de desarrollo backend.
 
-### generar token proporcionando los siguientes datos:
-password = contrasenadeprueba
+---
 
+## 🛠️ Tecnologías utilizadas
 
-username = prueba
+- 🐍 **Python**
+- 🌐 **Django**
+- 🔐 **Autenticación por Token**
+- 📦 **Pipenv** para gestión de dependencias
 
-http://127.0.0.1:8000/auth/token/login
+---
 
-#### edpoint para ver el menu del restaurante, ingresar el token en la pestana auth la opcion Bearer token y el prefijo Token
-http://127.0.0.1:8000/restaurant/menu/
+## 📥 Clonar el proyecto
 
-#### edpoint para ver las reservas hechas, ingresar el token en la pestana auth la opcion Bearer token y el prefijo Token
-http://127.0.0.1:8000/restaurant/booking/
+```bash
+git clone https://github.com/tu-usuario/tu-repositorio.git
+cd tu-repositorio
 
 
