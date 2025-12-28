@@ -2,6 +2,9 @@
 # Clonar el proyecto
 # instalar dependencias
     `pipenv shell`
+# correr servidor Django
+    `python manage.py runserver`
+
 ## Endpoints para prueba
 
 ### generar token proporcionando los siguientes datos:
