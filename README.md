@@ -1,4 +1,7 @@
 # Proyecto Final Capstone
+# Clonar el proyecto
+# instalar dependencias
+    `pipenv shell`
 ## Endpoints para prueba
 
 ### generar token proporcionando los siguientes datos:
