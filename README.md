@@ -1,7 +1,7 @@
 # 🚀 Proyecto Final Capstone – Little Lemon
 
-Este proyecto corresponde al **Capstone Final**, desarrollado con **Django**, enfocado en la construcción de una **aplicación web + API** para el restaurante *Little Lemon*.  
-Incluye autenticación mediante tokens, vistas HTML renderizadas en servidor y buenas prácticas de desarrollo backend.
+Este proyecto corresponde al **Capstone Final**, desarrollado con **Django y Django REST Framework**, enfocado en la construcción de una **API REST + vistas web** para el restaurante *Little Lemon*.  
+Incluye autenticación mediante tokens, endpoints protegidos y buenas prácticas de desarrollo backend.
 
 ---
 
@@ -9,43 +9,43 @@ Incluye autenticación mediante tokens, vistas HTML renderizadas en servidor y b
 
 - 🐍 **Python**
 - 🌐 **Django**
+- 🔁 **Django REST Framework**
+- 🔐 **Autenticación por Token**
 - 📄 **HTML**
 - 🎨 **CSS**
-- 🔐 **Autenticación por Token**
-- 📦 **Pipenv** para gestión de dependencias
+- 📦 **Pipenv**
 - 🧱 Patrón **Model–View–Template (MVT)**
 
 ---
 
 ## 🏗️ Arquitectura del Proyecto
 
-El proyecto sigue una **arquitectura modular**, separando claramente la configuración del proyecto, la lógica del negocio, la gestión de usuarios y la presentación.
+El proyecto sigue una **arquitectura modular y basada en capas**, separando configuración, lógica de negocio, autenticación y presentación.
 
-### 📁 Estructura general del proyecto
+### 📁 Estructura general
 
-- **LittleLemon/**  
-  Configuración principal del proyecto Django (settings, urls, wsgi/asgi)
-- **restaurant/**  
-  Lógica del negocio relacionada con el restaurante
-  - Modelos, vistas y rutas asociadas al menú y operaciones de menú
-- **users/**  
-  Gestión de usuarios
-  - Autenticación y autorización (registro, login, perfil)
-- **templates/**  
-  Vistas HTML renderizadas por Django
-- **static/**  
-  Archivos estáticos (CSS)
+- **LittleLemon/**
+  - Configuración global del proyecto Django
+- **restaurant/**
+  - Lógica del negocio
+  - Endpoints del menú y reservas
+- **users/**
+  - Gestión de usuarios y autenticación
+- **templates/**
+  - Vistas HTML renderizadas por Django
+- **static/**
+  - Archivos CSS
 
 ---
 
 ## 🔄 Flujo de una petición
 
-1. El cliente realiza una solicitud HTTP (API o vista web).  
-2. Django resuelve la ruta mediante `urls.py`.  
-3. La vista correspondiente procesa la solicitud.  
-4. Si es una API, devuelve una respuesta en JSON.  
-5. Si es una vista web, renderiza un template HTML.  
-6. Si la ruta está protegida, se valida el token de autenticación antes de continuar. 1
+1. El cliente realiza una petición HTTP.
+2. Django resuelve la ruta en `urls.py`.
+3. La vista correspondiente procesa la solicitud.
+4. Se valida autenticación (`IsAuthenticated`) si aplica.
+5. El serializer transforma los datos.
+6. Se devuelve la respuesta en JSON o HTML.
 
 ---
 
@@ -69,53 +69,78 @@ Este proyecto utiliza **Pipenv**:
 
     python manage.py runserver
 
-El servidor estará disponible en:  
+Servidor disponible en:  
 👉 http://127.0.0.1:8000/
 
 ---
 
 ## 🔑 Autenticación (Pruebas)
 
-Para acceder a los endpoints protegidos, primero debes generar un **token de autenticación**.
+Para acceder a los endpoints protegidos, debes generar un **token de autenticación**.
 
 ### 📌 Credenciales de prueba
 
     username: prueba
     password: contrasenadeprueba
 
-### 📌 Endpoint para generar token
+### 📌 Generar token
 
     POST http://127.0.0.1:8000/auth/token/login
 
-Incluye el token en los headers de tus solicitudes:
+Agregar el token en los headers:
 
     Authorization: Token TU_TOKEN_AQUÍ
 
 ---
 
-## 📊 Endpoints disponibles
+## 📊 Endpoints documentados
 
-### 🧑‍💻 Autenticación y usuarios
+### 🌐 Vistas Web
 
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| `POST` | `/auth/token/login/` | Generar token de autenticación |
-| `POST` | `/users/register/` | Registrar un nuevo usuario |
-| `GET`  | `/users/profile/` | Ver datos de perfil del usuario autenticado |
+| Método | Endpoint | Descripción |
+|------|--------|-------------|
+| GET | `/restaurant/index/` | Página principal |
+| GET | `/restaurant/about/` | Página "About" |
 
 ---
 
-### 🍽️ Restaurante / Menú
+### 🍽️ Menú (API REST)
 
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| `GET`  | `/restaurant/` | Listar elementos del restaurante |
-| `GET`  | `/restaurant/<id>/` | Ver elemento específico del menú |
-| `POST` | `/restaurant/create/` | Crear un nuevo elemento |
-| `PUT`  | `/restaurant/update/<id>/` | Actualizar un elemento existente |
-| `DELETE` | `/restaurant/delete/<id>/` | Eliminar un elemento del menú |
+> Protegidos con `IsAuthenticated`
 
-> 📌 Estos endpoints se derivan de las rutas definidas en tus archivos `urls.py` y vistas correspondientes dentro de la carpeta `restaurant`. 2
+| Método | Endpoint | Descripción |
+|------|--------|-------------|
+| GET | `/restaurant/menu/` | Listar ítems del menú |
+| POST | `/restaurant/menu/` | Crear ítem del menú |
+| GET | `/restaurant/menu/<int:pk>/` | Obtener ítem específico |
+| PUT | `/restaurant/menu/<int:pk>/` | Actualizar ítem |
+| DELETE | `/restaurant/menu/<int:pk>/` | Eliminar ítem |
+
+📌 Implementado con:
+- `ListCreateAPIView`
+- `RetrieveUpdateDestroyAPIView`
+
+---
+
+### 📅 Reservas / Booking (API REST)
+
+> Protegidos con `IsAuthenticated`
+
+| Método | Endpoint | Descripción |
+|------|--------|-------------|
+| GET | `/restaurant/booking/` | Listar reservas |
+| POST | `/restaurant/booking/` | Crear reserva |
+| GET | `/restaurant/booking/<int:pk>` | Obtener reserva |
+| PUT | `/restaurant/booking/<int:pk>` | Actualizar reserva |
+| DELETE | `/restaurant/booking/<int:pk>` | Eliminar reserva |
+
+---
+
+## 🔐 Seguridad
+
+- Autenticación basada en **Token**
+- Uso de `IsAuthenticated` en endpoints sensibles
+- Separación clara entre vistas públicas y API protegida
 
 ---
 
@@ -125,20 +150,18 @@ El proyecto incluye una **interfaz web básica**:
 
 - Templates HTML renderizados por Django
 - Estilos CSS propios
-- Formularios y vistas públicas para visualizar el menú y otras secciones
-- Integración directa entre backend y frontend
-
-Esto permite demostrar un enfoque **full-stack ligero**, sin depender de frameworks frontend externos.
+- Integración directa con el backend
+- Ideal para demostrar un enfoque **full-stack ligero**
 
 ---
 
 ## 🎯 Objetivos del proyecto
 
-- Construir una API REST funcional con Django
+- Construir una API REST funcional
 - Implementar autenticación segura
-- Integrar backend con vistas HTML
-- Aplicar separación de responsabilidades
-- Servir como proyecto de portafolio profesional
+- Aplicar buenas prácticas con Django REST Framework
+- Integrar backend y vistas web
+- Servir como proyecto profesional de portafolio
 
 ---
 
@@ -146,6 +169,5 @@ Esto permite demostrar un enfoque **full-stack ligero**, sin depender de framewo
 
 👨‍💻 **Eduardo**  
 Ingeniero | Backend Developer  
-Apasionado por Django, APIs REST y desarrollo de aplicaciones web bien estructuradas
-
+Apasionado por Django, APIs REST y desarrollo backend profesional
 
